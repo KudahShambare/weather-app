@@ -22,15 +22,22 @@ export default function App() {
   let tableRef = useRef();
   let parentRef = useRef();
 
+  //table values
+const [currentTemp,setCurrentTemp]=useState();
+const [currentPrecip,setCurrentPrecip]=useState();
+const [currentSummary,setCurrentSummary]=useState();
+const [currentWind,setCurrentWind]=useState();
+const [currentHumidity,setCurrentHumidity]=useState();
+const [currentIconUrl,setCurrentIconUrl]=useState();
+
+
+
   //state was 1 value behind so I replaced it with global variables
+  //Note: state works but there is need for a timeout
   let weather;
   let location;
-  //table values
-  let currentTemp;
-    let currentPrecip;
-  let currentHumidity;
-  let currentCondition;
-  let currentIconUrl;
+  
+ 
 
   //dates
   let currentDate=new Date();
@@ -52,8 +59,15 @@ export default function App() {
 
   //update table variables
   const updateTable=(obj)=>{
-currentTemp=obj.currentConditions.temp.c;
-console.log('temp '+currentTemp);
+setTimeout(() => {
+  setCurrentTemp(obj.currentConditions.temp.c+'°C');
+  setCurrentHumidity(obj.currentConditions.humidity);
+  setCurrentPrecip(obj.currentConditions.precip);
+  setCurrentWind(obj.currentConditions.wind.km+" km/hr")
+  setCurrentSummary(obj.currentConditions.comment)
+
+}, 2000);
+
 
   }
   //get user location
@@ -93,8 +107,9 @@ console.log('temp '+currentTemp);
   };
   //undefined regions
   const undefinedRegion = () => {
+    parentRef.current.style.display ='grid';
     myRef.current.innerHTML = "Unavailable or Undefined Location";
-   // tableRef.current.style.display="none";
+   tableRef.current.style.display="none";
   };
 
   return (
@@ -116,50 +131,50 @@ console.log('temp '+currentTemp);
           <Text ref={myRef}> Region</Text>
           <Table style={styles.table} ref={tableRef}>
             <Row data={[`${currentDate}`]} style={styles.tableHeadings} />
-            <Row data={["Temperature", `${currentTemp}`]} style={styles.tableData} />
-            <Row data={["Precipitation", "today"]} style={styles.tableData} />
-            <Row data={["Humidity", "today"]} style={styles.tableData} />
-            <Row data={["Wind Speed", "today"]} style={styles.tableData} />
+            <Row data={["Temperature", `${currentTemp} `]} style={styles.tableData} />
+            <Row data={["Precipitation",`${currentPrecip}`]} style={styles.tableData} />
+            <Row data={["Humidity", `${currentHumidity}`]} style={styles.tableData} />
+            <Row data={["Wind Speed", `${currentWind}`]} style={styles.tableData} />
             <Row
-              data={["Overall Condition", "today"]}
+              data={["Overall Condition", `${currentSummary}`]}
               style={styles.tableData}
             />
             <Text>7 Days Weather Forecast</Text>
           
             <Row data={[`${tomorrow}`]} style={styles.tableHeadings} />
-            <Row data={["Min Temperature", "today"]} style={styles.tableData} />
-            <Row data={["Max Temperature", "today"]} style={styles.tableData} />
-            <Row data={["Overall Condition", "today"]} style={styles.tableData} />
+            <Row data={["Min Temperature", "---"]} style={styles.tableData} />
+            <Row data={["Max Temperature", "---"]} style={styles.tableData} />
+            <Row data={["Overall Condition", "---"]} style={styles.tableData} />
 
             <Row data={[`${day2}`]} style={styles.tableHeadings} />
-            <Row data={["Min Temperature", "today"]} style={styles.tableData} />
-            <Row data={["Max Temperature", "today"]} style={styles.tableData} />
-            <Row data={["Overall Condition", "today"]} style={styles.tableData} />
+            <Row data={["Min Temperature", "---"]} style={styles.tableData} />
+            <Row data={["Max Temperature", "---"]} style={styles.tableData} />
+            <Row data={["Overall Condition", "---"]} style={styles.tableData} />
 
             <Row data={[`${day3}`]} style={styles.tableHeadings} />
-            <Row data={["Min Temperature", "today"]} style={styles.tableData} />
-            <Row data={["Max Temperature", "today"]} style={styles.tableData} />
-            <Row data={["Overall Condition", "today"]} style={styles.tableData} />
+            <Row data={["Min Temperature", "---"]} style={styles.tableData} />
+            <Row data={["Max Temperature", "---"]} style={styles.tableData} />
+            <Row data={["Overall Condition", "---"]} style={styles.tableData} />
 
             <Row data={[`${day4}`]} style={styles.tableHeadings} />
-            <Row data={["Min Temperature", "today"]} style={styles.tableData} />
-            <Row data={["Max Temperature", "today"]} style={styles.tableData} />
-            <Row data={["Overall Condition", "today"]} style={styles.tableData} />
+            <Row data={["Min Temperature", "---"]} style={styles.tableData} />
+            <Row data={["Max Temperature", "---"]} style={styles.tableData} />
+            <Row data={["Overall Condition", "---"]} style={styles.tableData} />
 
             <Row data={[`${day5}`]} style={styles.tableHeadings} />
-            <Row data={["Min Temperature", "today"]} style={styles.tableData} />
-            <Row data={["Max Temperature", "today"]} style={styles.tableData} />
-            <Row data={["Overall Condition", "today"]} style={styles.tableData} />
+            <Row data={["Min Temperature", "---"]} style={styles.tableData} />
+            <Row data={["Max Temperature", "---"]} style={styles.tableData} />
+            <Row data={["Overall Condition", "---"]} style={styles.tableData} />
 
             <Row data={[`${day6}`]} style={styles.tableHeadings} />
-            <Row data={["Min Temperature", "today"]} style={styles.tableData} />
-            <Row data={["Max Temperature", "today"]} style={styles.tableData} />
-            <Row data={["Overall Condition", "today"]} style={styles.tableData} />
+            <Row data={["Min Temperature", "---"]} style={styles.tableData} />
+            <Row data={["Max Temperature", "---"]} style={styles.tableData} />
+            <Row data={["Overall Condition", "---"]} style={styles.tableData} />
 
             <Row data={[`${day7}`]} style={styles.tableHeadings} />
-            <Row data={["Min Temperature", "today"]} style={styles.tableData} />
-            <Row data={["Max Temperature", "today"]} style={styles.tableData} />
-            <Row data={["Overall Condition", "today"]} style={styles.tableData} />
+            <Row data={["Min Temperature", "---"]} style={styles.tableData} />
+            <Row data={["Max Temperature", "---"]} style={styles.tableData} />
+            <Row data={["Overall Condition", "---"]} style={styles.tableData} />
 
           
           
@@ -194,7 +209,7 @@ container:{
     width: "100vw",
     alignItems: "center",
  minHeight:'100vh',
- height:'250vh'
+ height:'220vh'
   },
   table: {
     width: "80vw",
