@@ -23,14 +23,46 @@ export default function App() {
   let parentRef = useRef();
 
   //table values
-const [currentTemp,setCurrentTemp]=useState();
-const [currentPrecip,setCurrentPrecip]=useState();
-const [currentSummary,setCurrentSummary]=useState();
-const [currentWind,setCurrentWind]=useState();
-const [currentHumidity,setCurrentHumidity]=useState();
-const [currentIconUrl,setCurrentIconUrl]=useState();
+const [currentTemp,setCurrentTemp]=useState("---");
+const [currentPrecip,setCurrentPrecip]=useState("---");
+const [currentSummary,setCurrentSummary]=useState("---");
+const [currentWind,setCurrentWind]=useState("---");
+const [currentHumidity,setCurrentHumidity]=useState("---");
 
+//day1
+ const[day1MinTemp,setDay1MinTemp]=useState("---");
+ const[day1MaxTemp,setDay1MaxTemp]=useState("---");
+ const[day1Summary,setDay1Summary]=useState("---");
 
+//day2
+const[day2MinTemp,setDay2MinTemp]=useState("---");
+const[day2MaxTemp,setDay2MaxTemp]=useState("---");
+const[day2Summary,setDay2Summary]=useState("---");
+
+//day3
+const[day3MinTemp,setDay3MinTemp]=useState("---");
+const[day3MaxTemp,setDay3MaxTemp]=useState("---");
+const[day3Summary,setDay3Summary]=useState("---");
+
+//day4
+const[day4MinTemp,setDay4MinTemp]=useState("---");
+const[day4MaxTemp,setDay4MaxTemp]=useState("---");
+const[day4Summary,setDay4Summary]=useState("---");
+
+//day5
+const[day5MinTemp,setDay5MinTemp]=useState("---");
+const[day5MaxTemp,setDay5MaxTemp]=useState("---");
+const[day5Summary,setDay5Summary]=useState("---");
+
+//day6
+const[day6MinTemp,setDay6MinTemp]=useState("---");
+const[day6MaxTemp,setDay6MaxTemp]=useState("---");
+const[day6Summary,setDay6Summary]=useState("---");
+
+//day7
+const[day7MinTemp,setDay7MinTemp]=useState("---");
+const[day7MaxTemp,setDay7MaxTemp]=useState("---");
+const[day7Summary,setDay7Summary]=useState("---");
 
   //state was 1 value behind so I replaced it with global variables
   //Note: state works but there is need for a timeout
@@ -58,13 +90,45 @@ const [currentIconUrl,setCurrentIconUrl]=useState();
 
 
   //update table variables
+
   const updateTable=(obj)=>{
 setTimeout(() => {
+    //today
   setCurrentTemp(obj.currentConditions.temp.c+'°C');
   setCurrentHumidity(obj.currentConditions.humidity);
   setCurrentPrecip(obj.currentConditions.precip);
   setCurrentWind(obj.currentConditions.wind.km+" km/hr")
   setCurrentSummary(obj.currentConditions.comment)
+//FORECASTS
+//dAY1
+setDay1MinTemp(obj.next_days[1].min_temp.c+'°C');
+setDay1MaxTemp(obj.next_days[1].max_temp.c+'°C');
+setDay1Summary(obj.next_days[1].comment);
+
+//dAY2
+setDay2MinTemp(obj.next_days[2].min_temp.c+'°C');
+setDay2MaxTemp(obj.next_days[2].max_temp.c+'°C');
+setDay2Summary(obj.next_days[2].comment);
+//dAY3
+setDay3MinTemp(obj.next_days[3].min_temp.c+'°C');
+setDay3MaxTemp(obj.next_days[3].max_temp.c+'°C');
+setDay3Summary(obj.next_days[3].comment);
+//dAY4
+setDay4MinTemp(obj.next_days[4].min_temp.c+'°C');
+setDay4MaxTemp(obj.next_days[4].max_temp.c+'°C');
+setDay4Summary(obj.next_days[4].comment);
+//dAY5
+setDay5MinTemp(obj.next_days[5].min_temp.c+'°C');
+setDay5MaxTemp(obj.next_days[5].max_temp.c+'°C');
+setDay5Summary(obj.next_days[5].comment);
+//dAY6
+setDay6MinTemp(obj.next_days[6].min_temp.c+'°C');
+setDay6MaxTemp(obj.next_days[6].max_temp.c+'°C');
+setDay6Summary(obj.next_days[6].comment);
+//dAY7
+setDay7MinTemp(obj.next_days[7].min_temp.c+'°C');
+setDay7MaxTemp(obj.next_days[7].max_temp.c+'°C');
+setDay7Summary(obj.next_days[7].comment);
 
 }, 2000);
 
@@ -73,7 +137,6 @@ setTimeout(() => {
   //get user location
   const getUserLocation = (val) => {
     location = val;
-    console.log(location);
   };
   //fetch weather data
   const getWeatherInfo = () => {
@@ -82,7 +145,6 @@ setTimeout(() => {
         return resp.json();
       })
       .then((data) => {
-        console.log(data);
         if (data.status != "fail") {
          
 
@@ -98,6 +160,7 @@ setTimeout(() => {
       })
       .catch((err) => {
         console.log(err);
+        
       });
   };
   //display region name
@@ -142,39 +205,39 @@ setTimeout(() => {
             <Text>7 Days Weather Forecast</Text>
           
             <Row data={[`${tomorrow}`]} style={styles.tableHeadings} />
-            <Row data={["Min Temperature", "---"]} style={styles.tableData} />
-            <Row data={["Max Temperature", "---"]} style={styles.tableData} />
-            <Row data={["Overall Condition", "---"]} style={styles.tableData} />
+            <Row data={["Min Temperature", `${day1MinTemp}`]} style={styles.tableData} />
+            <Row data={["Max Temperature", `${day1MaxTemp}`]} style={styles.tableData} />
+            <Row data={["Overall Condition", `${day1Summary}`]} style={styles.tableData} />
 
             <Row data={[`${day2}`]} style={styles.tableHeadings} />
-            <Row data={["Min Temperature", "---"]} style={styles.tableData} />
-            <Row data={["Max Temperature", "---"]} style={styles.tableData} />
-            <Row data={["Overall Condition", "---"]} style={styles.tableData} />
+            <Row data={["Min Temperature", `${day2MinTemp}`]} style={styles.tableData} />
+            <Row data={["Max Temperature", `${day2MaxTemp}`]} style={styles.tableData} />
+            <Row data={["Overall Condition", `${day2Summary}`]} style={styles.tableData} />
 
             <Row data={[`${day3}`]} style={styles.tableHeadings} />
-            <Row data={["Min Temperature", "---"]} style={styles.tableData} />
-            <Row data={["Max Temperature", "---"]} style={styles.tableData} />
-            <Row data={["Overall Condition", "---"]} style={styles.tableData} />
+            <Row data={["Min Temperature", `${day3MinTemp}`]} style={styles.tableData} />
+            <Row data={["Max Temperature", `${day3MaxTemp}`]} style={styles.tableData} />
+            <Row data={["Overall Condition", `${day3Summary}`]} style={styles.tableData} />
 
             <Row data={[`${day4}`]} style={styles.tableHeadings} />
-            <Row data={["Min Temperature", "---"]} style={styles.tableData} />
-            <Row data={["Max Temperature", "---"]} style={styles.tableData} />
-            <Row data={["Overall Condition", "---"]} style={styles.tableData} />
+            <Row data={["Min Temperature", `${day4MinTemp}`]} style={styles.tableData} />
+            <Row data={["Max Temperature", `${day4MaxTemp}`]} style={styles.tableData} />
+            <Row data={["Overall Condition", `${day4Summary}`]} style={styles.tableData} />
 
             <Row data={[`${day5}`]} style={styles.tableHeadings} />
-            <Row data={["Min Temperature", "---"]} style={styles.tableData} />
-            <Row data={["Max Temperature", "---"]} style={styles.tableData} />
-            <Row data={["Overall Condition", "---"]} style={styles.tableData} />
+            <Row data={["Min Temperature", `${day5MinTemp}`]} style={styles.tableData} />
+            <Row data={["Max Temperature", `${day5MaxTemp}`]} style={styles.tableData} />
+            <Row data={["Overall Condition", `${day5Summary}`]} style={styles.tableData} />
 
             <Row data={[`${day6}`]} style={styles.tableHeadings} />
-            <Row data={["Min Temperature", "---"]} style={styles.tableData} />
-            <Row data={["Max Temperature", "---"]} style={styles.tableData} />
-            <Row data={["Overall Condition", "---"]} style={styles.tableData} />
+            <Row data={["Min Temperature", `${day6MinTemp}`]} style={styles.tableData} />
+            <Row data={["Max Temperature", `${day6MaxTemp}`]} style={styles.tableData} />
+            <Row data={["Overall Condition", `${day6Summary}`]} style={styles.tableData} />
 
             <Row data={[`${day7}`]} style={styles.tableHeadings} />
-            <Row data={["Min Temperature", "---"]} style={styles.tableData} />
-            <Row data={["Max Temperature", "---"]} style={styles.tableData} />
-            <Row data={["Overall Condition", "---"]} style={styles.tableData} />
+            <Row data={["Min Temperature", `${day7MinTemp}`]} style={styles.tableData} />
+            <Row data={["Max Temperature", `${day7MaxTemp}`]} style={styles.tableData} />
+            <Row data={["Overall Condition", `${day7Summary}`]} style={styles.tableData} />
 
           
           
