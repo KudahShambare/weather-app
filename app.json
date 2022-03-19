@@ -23,7 +23,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "tech.beasto.weather"
     },
     "web": {
       "favicon": "./assets/favicon.png"

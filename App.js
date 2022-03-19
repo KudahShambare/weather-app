@@ -5,6 +5,9 @@ import {
   ImageBackground,
   ScrollView,
   TextInput,
+  StatusBar,
+  Image,
+  
 } from "react-native-web";
 import {
   Table,
@@ -16,6 +19,7 @@ import {
   Cell,
 } from "react-native-table-component";
 import background from "./Images/background.jpeg";
+import SelectDropdown from 'react-native-select-dropdown'
 
 export default function App() {
   let myRef = useRef();
@@ -159,7 +163,7 @@ setDay7Summary(obj.next_days[7].comment);
         }
       })
       .catch((err) => {
-        console.log(err);
+      alert("An error occured")
         
       });
   };
@@ -177,7 +181,24 @@ setDay7Summary(obj.next_days[7].comment);
 
   return (
     <ScrollView style={styles.container}>
+      <StatusBar style="auto"/>
       <ImageBackground source={background} style={styles.page}>
+      
+        <View style={styles.nav}>
+         
+         <Image source={require('./assets/icon.png')}
+         style={{width: 50, height: 50,marginTop:'0'}}
+         />
+<Button title='About Us' color="rgb(242,156,24)" onPress={()=>{
+
+ alert('Beas(O) Technologies is an merging African technology company. Our main aim is to gear up Africa with necessary tech-resources so that the continent is not left behind in the ongoing Digital Revolution');
+}}/>
+<Button title='Contact Us' color="rgb(242,156,24)" onPress={()=>{
+  alert('Get in touch with the Developer on LinkedIn:  https://www.linkedin.com/in/kudakwashe-shambare/')
+}}/>
+
+           </View>
+
         <Text style={styles.name}> Beast(O) Weather </Text>
         <TextInput
           style={styles.location}
@@ -187,9 +208,7 @@ setDay7Summary(obj.next_days[7].comment);
             getUserLocation(userInput);
           }}
         />
-        <Button title="Get Weather" color="orangered" onPress={getWeatherInfo} style={styles.button}>
-          Get Weather Information
-        </Button>
+        <Button title="Get Weather" color="rgb(242,156,24)" onPress={getWeatherInfo}  />
         <View ref={parentRef} style={styles.weatherDetails}>
           <Text ref={myRef}> Region</Text>
           <Table style={styles.table} ref={tableRef}>
@@ -262,17 +281,18 @@ container:{
     marginBottom:'5vh'
   },
   name: {
-    color: "orangered",
+    color: "rgb(240,117,15)",
     marginTop: "10vh",
     fontWeight: "bold",
     fontSize: "xx-large",
     backgroundColor: "black",
+    padding:'2vh'
   },
   page: {
     width: "100vw",
     alignItems: "center",
  minHeight:'100vh',
- height:'220vh'
+ height:'230vh'
   },
   table: {
     width: "80vw",
@@ -288,7 +308,7 @@ container:{
   },
   tableData: {
     height: "5vh",
-    backgroundColor: "orangered",
+    backgroundColor: "rgb(240,117,15)",
    
   },
   weatherDetails:{
@@ -296,4 +316,24 @@ container:{
     marginTop:'5vh',
     backgroundColor: "aliceblue",
   },
+  nav:{
+       width:'100%',
+    height:'10vh',
+
+    padding:'3vh',
+    display:'flex',
+    flexDirection:'row',
+    justifyContent:'space-around',
+    backgroundColor:'grey',
+
+  },
+  navItems:{
+    color:'rgb(240,117,15)',
+    fontSize:'larger',
+    fontWeight:'black',
+    backgroundColor:'black',
+    height:'5vh',
+    padding:'1vh'
+    
+  }
 });
